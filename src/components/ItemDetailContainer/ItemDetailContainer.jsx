@@ -13,6 +13,8 @@ const ItemDetailContainer = () => {
   if (!product) {
     return <Navigate to="/error404" />;
   }
+
+  console.log(product);
   return (
     <Layout>
       <div className="flex flex-col gap-10 w-full">
@@ -27,8 +29,8 @@ const ItemDetailContainer = () => {
         <div className="w-full flex flex-row justify-between items-center py-5 px-5 md:px-32 mx-auto max-w-[1440px]">
           <span className="text-xs md:text-md">
             <p>Hasta 6 cuotas sin interés de</p>
-            <p className="font-semibold text-3xl">$31025 ARS</p>
-            <p>CoderBeca + 15% OFF $188150 ARS</p>
+            <p className="font-semibold text-3xl">${(product.coderBeca/6).toFixed(0)} ARS</p>
+            <p>CoderBeca + 15% OFF ${product.coderBeca} ARS</p>
           </span>
           <BuyButton product={product} />
         </div>

@@ -23,7 +23,7 @@ const ItemList = ({ id, title, cursos, duration, standardPlan, coderBeca }) => {
  
         <span className="flex flex-col">
           <p>Hasta 6 cuotas sin interés</p>
-          <p className="text-3xl">$ {(standardPlan / 6).toFixed(0)} ARS</p>
+          <p className="text-3xl">$ {(coderBeca / 6).toFixed(0)} ARS</p>
         </span>
         <Link to={`/products/item/${id}`}>
         <button className="btn btn-primary btn-outline w-full mx-auto">
