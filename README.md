@@ -1,3 +1,66 @@
+# Project: Basic E-commerce for Online Courses
+
+**Language Options:**
+
+- [Español (Spanish)](#proyecto-e-commerce-super-básico-de-cursos-en-línea)
+- [English (Inglés)](#project-basic-e-commerce-for-online-courses)
+
+---
+
+## Project: Basic E-commerce for Online Courses
+
+This is a project for an online course platform, where users can explore and select courses from different categories to improve their skills and knowledge. The platform offers a variety of courses taught by experts in various fields.
+
+### Key Features:
+
+1. **Course Exploration:** Users can explore different categories of courses available on the platform. Each category contains a list of related courses.
+
+2. **Course Details:** By clicking on a course, users can access the course detail page, where they will find detailed information about the course content, duration, cost, and other relevant details.
+
+3. **Shopping Cart:** Users can add courses to their shopping cart and view the subtotal of their selection before proceeding to checkout.
+
+4. **Checkout Process:** Once users have selected the desired courses, they can proceed to the checkout process to enroll in the selected courses. They will be provided with various payment options and details to complete the transaction.
+
+### Project Structure:
+
+The project is organized into different folders and components:
+
+- **components:** Contains reusable components used in different parts of the project, such as `NavBar`, `Footer`, `ItemDetail`, `ItemList`, `BuyButton`, among others.
+
+- **assets:** Stores images, icons, and other resources used in the project.
+
+- **pages:** Contains the main pages of the project, such as the home page, products (courses) page, checkout page, and error 404 page.
+
+- **utils:** Contains utility files, such as `DataContextProvider`, which provides a context for sharing course data between different components.
+
+- **App.jsx:** This is the main entry point of the project, where routes are configured, and components are rendered.
+
+### Technologies Used:
+
+The project uses the following technologies and tools:
+
+- React.js: A JavaScript library for building interactive user interfaces and reusable components.
+
+- React Router: For navigation between different pages and managing routes in the application.
+
+- Firebase: For storing and retrieving data, in this case, course data.
+
+- Swiper: A library for implementing interactive sliders and carousels in the application.
+
+### How to Run the Project:
+
+1. Clone the project repository on your local machine using `git clone`.
+
+2. Install the dependencies using `npm install`.
+
+3. Set up and connect the application with your Firebase project (make sure to create a database with the appropriate structure to store course data).
+
+4. Run the application using `npm start`.
+
+5. Open your browser and navigate to `http://localhost:3000` to see the application in action.
+
+---
+
 # Proyecto: E-commerce super básico de Cursos en Línea
 
 Este es un proyecto de una plataforma de cursos en línea, donde los usuarios pueden explorar y seleccionar cursos de diferentes categorías para mejorar sus habilidades y conocimientos. La plataforma ofrece una variedad de cursos impartidos por expertos en distintos campos.
@@ -49,5 +112,7 @@ El proyecto utiliza las siguientes tecnologías y herramientas:
 4. Ejecuta la aplicación utilizando `npm start`.
 
 5. Abre tu navegador y navega a `http://localhost:3000` para ver la aplicación en funcionamiento.
+
+---
 
 # ProyectoFinalGallardo
