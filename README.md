@@ -1,5 +1,13 @@
 # Project: Basic E-commerce for Online Courses
 
+<div align="center">
+  
+![GIF 1](https://github.com/speedbuild98/ProyectoFinalGallardo/blob/main/src/assets/mobile.gif?raw=true)
+  
+![GIF 2](https://github.com/speedbuild98/ProyectoFinalGallardo/blob/main/src/assets/mobile%20(1).gif?raw=true)
+
+</div>
+
 **Language Options:**
 
 - [Español (Spanish)](#proyecto-e-commerce-super-básico-de-cursos-en-línea)
