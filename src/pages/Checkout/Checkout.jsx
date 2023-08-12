@@ -2,12 +2,63 @@ import { useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import { useCart } from "../../components/CartProvider/CartProvider";
 import { Link } from "react-router-dom";
+import { collection, addDoc, updateDoc, doc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 const Checkout = () => {
   const { cart, setCart } = useCart();
-
   const [cupon, setCupon] = useState("");
   const [cuponApplied, setCuponApplied] = useState(false);
+  const [ordenId, setOrdenId] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    nombre: "",
+    apellido: "",
+    telefono: "",
+  });
+
+  const handleChangeUserInfo = (event) => {
+    const { name, value } = event.target;
+    setUserInfo((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handlerForm = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const orden = {
+      items: cart.map((item) => ({
+        id: item.id,
+        nombre: item.title,
+        precio: item.standardPlan,
+      })),
+      total:
+        cuponApplied === true && cupon === "GALLARDODEV"
+          ? coderBeca / 2
+          : coderBeca,
+      nombre: userInfo.nombre,
+      apellido: userInfo.apellido,
+      telefono: userInfo.telefono,
+      email: userInfo.email,
+      fecha: new Date(),
+    };
+
+    try {
+      const docRef = await addDoc(collection(db, "Pedidos"), orden);
+      setOrdenId(docRef.id);
+    } catch (error) {
+      console.error("Error al crear la orden", error);
+      setError("Error, intenta de nuevo más tarde");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const calculateCoderBeca = () => {
     let coderBeca = 0;
@@ -88,7 +139,12 @@ const Checkout = () => {
         <span className="flex font-semibold w-full justify-between">
           <p className="font-semibold uppercase text-2xl">Total</p>
           <span className="flex flex-row justify-end gap-2">
-            <p className=""> {cuponApplied === true && cupon === "GALLARDODEV" ? (`$ ${coderBeca/2} ARS`) : (`$ ${coderBeca} ARS`) }</p>
+            <p className="">
+              {" "}
+              {cuponApplied === true && cupon === "GALLARDODEV"
+                ? `$ ${coderBeca / 2} ARS`
+                : `$ ${coderBeca} ARS`}
+            </p>
           </span>
         </span>
 
@@ -120,11 +176,79 @@ const Checkout = () => {
             ) : null}
           </span>
         </div>
+
+        <div className="divider"></div>
+
+        <form
+          onSubmit={handlerForm}
+          className="flex flex-col mt-5 w-1/2 mx-auto gap-2"
+        >
+          <h2 className="text-3xl font-semibold">Terminar compra</h2>
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={userInfo.email}
+            onChange={handleChangeUserInfo}
+            className="input input-bordered"
+            disabled={ordenId}
+          />
+          <label htmlFor="name">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value={userInfo.nombre}
+            onChange={handleChangeUserInfo}
+            className="input input-bordered"
+            disabled={ordenId}
+          />
+          <label htmlFor="lastName">Apellido</label>
+          <input
+            type="text"
+            id="apellido"
+            name="apellido"
+            value={userInfo.apellido}
+            onChange={handleChangeUserInfo}
+            className="input input-bordered"
+            disabled={ordenId}
+          />
+          <label htmlFor="phone">Teléfono</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            value={userInfo.telefono}
+            onChange={handleChangeUserInfo}
+            className="input input-bordered"
+            disabled={ordenId}
+          />
+          {ordenId ? (
+            <p className="my-3 mx-auto">
+              ¡Gracias por tu compra! Tu número de orden es{" "}
+              <strong>{ordenId}</strong>
+            </p>
+          ) : (
+            <button
+              disabled={loading}
+              type="submit"
+              className="btn btn-primary mt-5"
+            >
+              Enviar
+            </button>
+          )}
+          {error && <p className="text-red-500 mt-2">{error}</p>}
+        </form>
+
         <button>
-        <Link to="/products" className="btn btn-primary btn-outline btn-sm mt-20">
-          Ver más cursos
-        </Link>
-      </button>
+          <Link
+            to="/products"
+            className="btn btn-ghost btn-outline btn-sm mt-10"
+          >
+            Ver más cursos
+          </Link>
+        </button>
       </div>
     </Layout>
   );
